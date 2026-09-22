@@ -1,0 +1,36 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate config for BeyondFolder Nuxt projects",
+  "extends": ["github>nuxt/renovate-config-nuxt"],
+  "platformAutomerge": false,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "automerge": true
+  },
+  "postUpdateOptions": ["npmDedupe"],
+  "packageRules": [
+    {
+      "matchDepTypes": ["resolutions"],
+      "enabled": false
+    },
+    {
+      "description": "Auto-merge non-major updates once all status checks pass",
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "automerge": true
+    },
+    {
+      "description": "0.x minor bumps are breaking under semver: separate PR, manual review (a group only auto-merges if every update in it may)",
+      "matchCurrentVersion": "/^0\\./",
+      "matchUpdateTypes": ["minor"],
+      "groupName": "0.x minor updates",
+      "groupSlug": "zero-minor",
+      "automerge": false
+    },
+    {
+      "description": "wrangler minors can require a new @cloudflare/workers-types major, so update them together",
+      "matchPackageNames": ["wrangler", "@cloudflare/workers-types"],
+      "groupName": "cloudflare tooling",
+      "groupSlug": "cloudflare-tooling"
+    }
+  ]
+}

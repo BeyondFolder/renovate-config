@@ -32,6 +32,17 @@
       "matchPackageNames": ["wrangler", "@cloudflare/workers-types"],
       "groupName": "cloudflare tooling",
       "groupSlug": "cloudflare-tooling"
+    },
+    {
+      "description": "TypeScript 7 (the Go port) ships no JS API yet, so vue-tsc, typescript-eslint and nuxt prepare crash on it",
+      "matchPackageNames": ["typescript"],
+      "allowedVersions": "<7"
+    },
+    {
+      "description": "AI SDK packages pin each other's majors, so update them together",
+      "matchPackageNames": ["ai", "@ai-sdk/**", "workers-ai-provider", "ai-gateway-provider", "@openrouter/ai-sdk-provider"],
+      "groupName": "AI SDK",
+      "groupSlug": "ai-sdk"
     }
   ]
 }
